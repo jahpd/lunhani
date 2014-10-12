@@ -1,6 +1,18 @@
+
 #-*- coding: utf-8 -*-
 import numpy as n
 from scipy.io import wavfile as w
+import os, random
+from sys import platform as _platform
+
+
+#limpa arquivos
+os.system("rm ./*.wav")
+
+# para macs
+if _platform == "darwin":
+     if !os.path.exists('/usr/share/espeak-data/'):
+         os.system("ln -s /Applications/espeak-1.45.04/espeak-data/ /usr/share/espeak-data")
 
 H=n.hstack
 V=n.vstack
@@ -182,49 +194,58 @@ orig=n.copy(s)
 s = n.int16(s * float(2**15-1))
 w.write("lunhaniAlpha.wav",f_a, s) # escrita do som
 
-import os, random
-palavras=["lunhani","javascript","vivace","coffescript","cravelho","cravelhoooooo","craveeeeeeelho","craaaaaaaaavelho","craaaaaaaaavvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvkkkkkkkkkkklllllllllllllllhhhhhhhhhhhhhhtttttttttttpbsadoijasdfoijsaf iajsdfoasijdfasdiofjolvelhovelhooooooooooooooooooadsiajisdasdyyyyyyo yo yo yooooooooooooo"]
-vozes="f3,f2,f1,f5,m5,m1,m3".split(",")
-for palavra in palavras:
-    os.system("espeak -vpt-pt+%s -w%s.wav '%s'"%(random.sample(vozes,1)[0],palavra[:20],palavra))
-ff=w.read("javascript.wav")[1]
+def cria_sons_das_palavras(*args):
+  vozes="f3,f2,f1,f5,m5,m1,m3".split(",")
+  # Verificar sistema operacional
+  for palavra in args:
+      if _platform == "linux" or _platform == "linux2":
+          os.system("espeak -vpt-pt+%s -w%s.wav '%s'"%(random.sample(vozes,1)[0],palavra[:20],palavra))
+      if _platform == "darwin":
+            os.system("/Applications/espeak-1.45.04/speak -vpt-pt+%s -w%s.wav '%s'"%(random.sample(vozes,1)[0],palavra[:20],palavra))
+      
+            
+cria_sons_das_palavras("lunhani","javascript","vivace","coffescript","cravelho","cravelhoooooo","craveeeeeeelho","craaaaaaaaavelho","craaaaaaaaavvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvkkkkkkkkkkklllllllllllllllhhhhhhhhhhhhhhtttttttttttpbsadoijasdfoijsaf iajsdfoasijdfasdiofjolvelhovelhooooooooooooooooooadsiajisdasdyyyyyyo yo yo yooooooooooooo", "figado")
+
+def 
+
+ff=w.read("./javascript.wav")[1]
 ff_=n.fft.fft(ff)
 s=ff2=n.fft.ifft( n.hstack((ff_,n.zeros(len(ff_)) ))  ).real
 js=((s-s.min())/(s.max()-s.min()))*2.-1.
 
-ff=w.read("lunhaniFoo.wav")[1]
+ff=w.read("./lunhaniFoo.wav")[1]
 ff_=n.fft.fft(ff)
 s=ff2=n.fft.ifft( n.hstack((ff_,n.zeros(len(ff_)) ))  ).real
 lh=((s-s.min())/(s.max()-s.min()))*2.-1.
 
-ff=w.read("vivace.wav")[1]
+ff=w.read("./vivace.wav")[1]
 ff_=n.fft.fft(ff)
 s=ff2=n.fft.ifft( n.hstack((ff_,n.zeros(len(ff_)) ))  ).real
 viv=((s-s.min())/(s.max()-s.min()))*2.-1.
 
-ff=w.read("coffeescript.wav")[1]
+ff=w.read("./coffeescript.wav")[1]
 ff_=n.fft.fft(ff)
 s=ff2=n.fft.ifft( n.hstack((ff_,n.zeros(len(ff_)) ))  ).real
 coff=((s-s.min())/(s.max()-s.min()))*2.-1.
 
-ff=w.read("cravelho.wav")[1]
+ff=w.read("./cravelho.wav")[1]
 ff_=n.fft.fft(ff)
 s=ff2=n.fft.ifft( n.hstack((ff_,n.zeros(len(ff_)) ))  ).real
 crav=((s-s.min())/(s.max()-s.min()))*2.-1.
 
-ff=w.read("craaaaaaaaavvvvvvvvv.wav")[1]; ff_=n.fft.fft(ff)
+ff=w.read("./craaaaaaaaavvvvvvvvv.wav")[1]; ff_=n.fft.fft(ff)
 s=ff2=n.fft.ifft( n.hstack((ff_,n.zeros(len(ff_)) ))  ).real
 crav_=((s-s.min())/(s.max()-s.min()))*2.-1.
 
-ff=w.read("cravelhoooooo.wav")[1]; ff_=n.fft.fft(ff)
+ff=w.read("./cravelhoooooo.wav")[1]; ff_=n.fft.fft(ff)
 s=ff2=n.fft.ifft( n.hstack((ff_,n.zeros(len(ff_)) ))  ).real
 cravo=((s-s.min())/(s.max()-s.min()))*2.-1.
 
-ff=w.read("craveeeeeeelho.wav")[1]; ff_=n.fft.fft(ff)
+ff=w.read("./craveeeeeeelho.wav")[1]; ff_=n.fft.fft(ff)
 s=ff2=n.fft.ifft( n.hstack((ff_,n.zeros(len(ff_)) ))  ).real
 crave=((s-s.min())/(s.max()-s.min()))*2.-1.
 
-ff=w.read("craaaaaaaaavvvvvvvvv.wav")[1]; ff_=n.fft.fft(ff)
+ff=w.read("./craaaaaaaaavvvvvvvvv.wav")[1]; ff_=n.fft.fft(ff)
 s=ff2=n.fft.ifft( n.hstack((ff_,n.zeros(len(ff_)) ))  ).real
 crava=((s-s.min())/(s.max()-s.min()))*2.-1.
 
@@ -338,7 +359,7 @@ TT+=T*80
 orig[TT:TT+len(TK)]+=TK
 TT=T*24.75;TK=js[::-1]
 TT+=T*80
-orig[TT:TT+len(TK)]+=TK
+x`orig[TT:TT+len(TK)]+=TK
 TT=T*25;TK=coff[::-1]
 TT+=T*80
 orig[TT:TT+len(TK)]+=TK
